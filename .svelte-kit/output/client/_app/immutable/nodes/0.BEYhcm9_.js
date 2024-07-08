@@ -1,0 +1,1 @@
+import{c as a,b as o,d as l,f as s}from"../chunks/disclose-version.0b-cXPwx.js";function f(e){var t;var n=(t=e.$$slots)==null?void 0:t.default;return n===!0?e.children:n}function d(e,n){var t=a(),r=s(t);o(r,f(n),{}),l(e,t)}export{d as component};
