@@ -137,12 +137,6 @@ function unsubscribe_stores(store_values) {
     store_values[store_name][1]();
   }
 }
-function slot(payload, slot_fn, slot_props, fallback_fn) {
-  if (slot_fn === void 0) ;
-  else {
-    slot_fn(payload, slot_props);
-  }
-}
 function ensure_array_like(array_like_or_iterator) {
   return array_like_or_iterator?.length !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
 }
@@ -153,13 +147,12 @@ export {
   HYDRATION_END as a,
   HYDRATION_ERROR as b,
   pop as c,
-  slot as d,
+  store_get as d,
   escape_html as e,
-  store_get as f,
+  ensure_array_like as f,
   getContext as g,
-  ensure_array_like as h,
-  attr as i,
-  stringify as j,
+  attr as h,
+  stringify as i,
   noop as n,
   push as p,
   render as r,

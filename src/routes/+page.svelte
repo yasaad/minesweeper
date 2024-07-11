@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { derived } from 'svelte/store';
+
 	enum GameState {
 		PLAYING,
 		GAMEOVER,
@@ -15,9 +17,11 @@
 		[GameMode.HARD]: { height: 16, width: 30, numberOfBombs: 99 }
 	};
 	let gameMode = $state(GameMode.EASY);
+	let usedFlags = $state(0);
 	let height = $derived(GAME_SETTINGS[gameMode].height);
 	let width = $derived(GAME_SETTINGS[gameMode].width);
 	let numberOfBombs = $derived(GAME_SETTINGS[gameMode].numberOfBombs);
+	let remainingFlags = $derived(numberOfBombs - usedFlags);
 	const DIRECTIONS = [
 		[0, -1],
 		[0, 1],
@@ -29,7 +33,6 @@
 		[1, 1]
 	];
 	let squaresToIdentify = $derived(height * width - numberOfBombs);
-	let remainingFlags = $state(numberOfBombs);
 	let score = $state(0);
 	let gameState = $state(GameState.PLAYING);
 	let timeout: number;
@@ -139,10 +142,10 @@
 			return;
 		}
 		if (visitedValue === 0 && remainingFlags > 0) {
-			remainingFlags -= 1;
+			usedFlags += 1;
 			visitedBoard[x][y] = -1;
 		} else if (visitedValue === -1) {
-			remainingFlags += 1;
+			usedFlags -= 1;
 			visitedBoard[x][y] = 0;
 		}
 		checkGameState();
@@ -173,7 +176,7 @@
 		resetBoards();
 		placeBombs();
 		score = 0;
-		remainingFlags = numberOfBombs;
+		usedFlags = 0;
 		gameState = GameState.PLAYING;
 	}
 

@@ -1,16 +1,11 @@
-import { d as slot } from "../../chunks/index.js";
-function default_slot($$props) {
-  var children = $$props.$$slots?.default;
-  if (children === true) {
-    return $$props.children;
-  } else {
-    return children;
-  }
-}
+import { c as pop, p as push } from "../../chunks/index.js";
 function _layout($$payload, $$props) {
+  push();
+  let { children } = $$props;
   $$payload.out += `<!--[-->`;
-  slot($$payload, default_slot($$props), {});
+  children($$payload);
   $$payload.out += `<!--]-->`;
+  pop();
 }
 export {
   _layout as default

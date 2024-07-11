@@ -1,4 +1,4 @@
-import { h as ensure_array_like, i as attr, e as escape_html, j as stringify, c as pop, p as push } from "../../chunks/index.js";
+import { f as ensure_array_like, h as attr, e as escape_html, i as stringify, c as pop, p as push } from "../../chunks/index.js";
 function _page($$payload, $$props) {
   push();
   var GameState = /* @__PURE__ */ ((GameState2) => {
@@ -34,9 +34,11 @@ function _page($$payload, $$props) {
     }
   };
   let gameMode = 0;
+  let usedFlags = 0;
   let height = GAME_SETTINGS[gameMode].height;
   let width = GAME_SETTINGS[gameMode].width;
   let numberOfBombs = GAME_SETTINGS[gameMode].numberOfBombs;
+  let remainingFlags = numberOfBombs - usedFlags;
   const DIRECTIONS = [
     [0, -1],
     [0, 1],
@@ -48,7 +50,6 @@ function _page($$payload, $$props) {
     [1, 1]
   ];
   let squaresToIdentify = height * width - numberOfBombs;
-  let remainingFlags = numberOfBombs;
   let score = 0;
   let gameState = 0;
   let board = Array(height).fill(0).map(() => Array(width).fill(0));

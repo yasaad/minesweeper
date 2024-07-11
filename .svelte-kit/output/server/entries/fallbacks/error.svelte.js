@@ -1,4 +1,4 @@
-import { g as getContext, e as escape_html, f as store_get, u as unsubscribe_stores, c as pop, p as push } from "../../chunks/index.js";
+import { g as getContext, e as escape_html, d as store_get, u as unsubscribe_stores, c as pop, p as push } from "../../chunks/index.js";
 import "../../chunks/exports.js";
 import "devalue";
 function get(key, parse = JSON.parse) {
