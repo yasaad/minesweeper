@@ -186,36 +186,47 @@
 	}
 </script>
 
-<button
-	class="m-auto rounded bg-green-300 px-4 py-2 font-bold text-gray-800 enabled:hover:bg-green-400 disabled:bg-gray-300 disabled:text-gray-400"
-	disabled={gameMode === GameMode.EASY}
-	onclick={() => changeGameMode(GameMode.EASY)}>Easy</button
->
-<button
-	class="m-auto rounded bg-yellow-300 px-4 py-2 font-bold text-gray-800 hover:bg-yellow-400 disabled:bg-gray-300 disabled:text-gray-400"
-	disabled={gameMode === GameMode.MEDIUM}
-	onclick={() => changeGameMode(GameMode.MEDIUM)}>Medium</button
->
-<button
-	class="m-auto rounded bg-red-300 px-4 py-2 font-bold text-gray-800 hover:bg-red-400 disabled:bg-gray-300 disabled:text-gray-400"
-	disabled={gameMode === GameMode.HARD}
-	onclick={() => changeGameMode(GameMode.HARD)}>Hard</button
->
+<svelte:head>
+	<meta name="description" content="Minesweeper clone built using SvelteKit" />
+</svelte:head>
+
+<div class="flex justify-center gap-8 p-5">
+	<button
+		aria-label="Easy GameMode"
+		class="m-0 rounded bg-green-300 px-4 py-2 font-bold text-gray-800 enabled:hover:bg-green-400 disabled:bg-gray-300 disabled:text-gray-400"
+		disabled={gameMode === GameMode.EASY}
+		onclick={() => changeGameMode(GameMode.EASY)}>Easy</button
+	>
+	<button
+		aria-label="Medium GameMode"
+		class="m-0 rounded bg-yellow-300 px-4 py-2 font-bold text-gray-800 hover:bg-yellow-400 disabled:bg-gray-300 disabled:text-gray-400"
+		disabled={gameMode === GameMode.MEDIUM}
+		onclick={() => changeGameMode(GameMode.MEDIUM)}>Medium</button
+	>
+	<button
+		aria-label="Hard GameMode"
+		class="m-0 rounded bg-red-300 px-4 py-2 font-bold text-gray-800 hover:bg-red-400 disabled:bg-gray-300 disabled:text-gray-400"
+		disabled={gameMode === GameMode.HARD}
+		onclick={() => changeGameMode(GameMode.HARD)}>Hard</button
+	>
+</div>
 
 <div class="align-items-center flex flex-col gap-5 pt-5 text-center">
 	<div class="flex justify-center gap-5">
 		<h1>Score: {score}/{squaresToIdentify}</h1>
 		<h1>🚩 {remainingFlags}</h1>
 	</div>
-	<div>
+
+	<div class="m-auto w-fit border-2 border-gray-200">
 		{#each board as row, x}
-			<div class="whitespace-nowrap">
+			<div class="block w-fit whitespace-nowrap">
 				{#each row as value, y}
 					<button
+						aria-label={`Board Cell Row:${x} Column: ${y}`}
 						class="size-8 border align-middle {visitedBoard[x][y] === 1 && board[x][y] !== -1
-							? ' bg-green-200'
+							? ' border-0 bg-green-200'
 							: visitedBoard[x][y] === 1
-								? 'bg-red-400'
+								? 'border-0 bg-red-400'
 								: ''} enabled:hover:bg-slate-100"
 						disabled={gameState !== GameState.PLAYING || visitedBoard[x][y] === 1}
 						onclick={() => handleClick(x, y)}
